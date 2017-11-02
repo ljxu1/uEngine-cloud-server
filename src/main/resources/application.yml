@@ -1,0 +1,23 @@
+management:
+  security:
+    enabled: false
+
+security:
+  basic:
+    enabled: false
+
+---
+spring:
+  profiles: dev
+
+server:
+  port: 8080
+  servletPath: /
+
+---
+spring:
+  profiles: docker
+
+server:
+  port: 8080
+  servletPath: /
