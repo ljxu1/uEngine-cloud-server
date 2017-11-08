@@ -23,7 +23,7 @@
         "hostPort": 0,
         "labels": {},
         "protocol": "tcp",
-        "servicePort": 10004
+        "servicePort": 10005
       }
     ]
   },
