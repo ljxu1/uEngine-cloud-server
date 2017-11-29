@@ -5,9 +5,12 @@ management:
 security:
   basic:
     enabled: false
+  ignored: /**
 
 ---
 spring:
+  security:
+    enabled: false
   profiles: dev
 
 server:

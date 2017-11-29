@@ -12,7 +12,7 @@
     "type": "DOCKER",
     "docker": {
       "forcePullImage": true,
-      "image": "gitlab.uengine.io:5000/uengine-cloud-server:v1",
+      "image": "sppark/uengine-cloud-server:v1",
       "parameters": [],
       "privileged": false
     },

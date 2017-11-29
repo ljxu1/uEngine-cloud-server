@@ -1,5 +1,9 @@
 package org.uengine.cloud.tenant;
 
+import org.opencloudengine.garuda.model.User;
+
+import java.util.Map;
+
 /**
  * Created by uengine on 2017. 11. 14..
  */
@@ -7,6 +11,7 @@ public class TenantContext {
     static ThreadLocal<TenantContext> local = new ThreadLocal();
     String tenantId;
     String userId;
+    Map user;
 
     public String getTenantId() {
         return this.tenantId;
@@ -22,6 +27,14 @@ public class TenantContext {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public Map getUser() {
+        return user;
+    }
+
+    public void setUser(Map user) {
+        this.user = user;
     }
 
     public TenantContext(String tenantId) {

@@ -12,6 +12,7 @@ import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.util.UrlPathHelper;
@@ -24,7 +25,7 @@ import org.springframework.web.util.UrlPathHelper;
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
-public class Application extends WebMvcConfigurerAdapter{
+public class Application {
 
     @RequestMapping("/health")
     public String health() {
@@ -34,13 +35,6 @@ public class Application extends WebMvcConfigurerAdapter{
     public static void main(String[] args) {
         System.setProperty("org.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH", "true");
         new SpringApplicationBuilder(Application.class).web(true).run(args);
-    }
-
-    @Override
-    public void configurePathMatch(PathMatchConfigurer configurer) {
-        UrlPathHelper urlPathHelper = new UrlPathHelper();
-        urlPathHelper.setUrlDecode(false);
-        configurer.setUrlPathHelper(urlPathHelper);
     }
 
 }

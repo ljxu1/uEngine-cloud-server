@@ -9,6 +9,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * Created by uengine on 2017. 6. 12..
@@ -55,6 +56,7 @@ public class TenantAwareFilter implements Filter {
             JWSObject jwsObject = null;
             String tenantId = null;
             String userName = null;
+            Map user = null;
             JSONObject contexts = null;
             try {
                 jwsObject = JWSObject.parse(token);
@@ -65,6 +67,7 @@ public class TenantAwareFilter implements Filter {
                 contexts = (JSONObject) jwtClaimsSet.getClaim("context");
                 userName = (String) contexts.get("userName");
                 tenantId = userName.split("@")[1];
+                user = (Map) contexts.get("user");
 
             } catch (Exception e) {
                 if (isAllowAnonymousTenant()) {
@@ -82,6 +85,7 @@ public class TenantAwareFilter implements Filter {
 
             new TenantContext(tenantId);
             TenantContext.getThreadLocalInstance().setUserId(userName);
+            TenantContext.getThreadLocalInstance().setUser(user);
             filterChain.doFilter(servletRequest, servletResponse);
         }
     }
