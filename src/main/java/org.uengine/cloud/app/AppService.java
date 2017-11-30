@@ -114,7 +114,11 @@ public class AppService {
         this.saveDcosYaml(dcosMap);
 
         //ci-deploy-rollback.json 을  ci-deploy-production.json 으로.
-        this.copyDeployJson(appName, "rollback", "prod");
+        try{
+            this.copyDeployJson(appName, "rollback", "prod");
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
 
         //라우터 리프레쉬
         dcosApi.refreshRouter();
