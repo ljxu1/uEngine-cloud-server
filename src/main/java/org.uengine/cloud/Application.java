@@ -6,6 +6,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
 import org.springframework.security.web.firewall.HttpFirewall;
@@ -25,6 +26,7 @@ import org.springframework.web.util.UrlPathHelper;
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
+@EnableScheduling
 public class Application {
 
     @RequestMapping("/health")

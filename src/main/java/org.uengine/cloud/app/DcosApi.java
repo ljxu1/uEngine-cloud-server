@@ -72,7 +72,7 @@ public class DcosApi implements InitializingBean {
 
     public Map createApp(String deployString) throws Exception {
         HttpResponse response = new HttpUtils().makeRequest("POST",
-                host + "/service/marathon/v2/apps",
+                host + "/service/marathon/v2/apps?force=true",
                 deployString,
                 this.addHeaders()
         );
@@ -98,5 +98,27 @@ public class DcosApi implements InitializingBean {
                 null,
                 new HashMap<>()
         );
+    }
+
+    public Map getState() throws Exception {
+        HttpResponse response = new HttpUtils().makeRequest("GET",
+                host + "/mesos/master/state",
+                null,
+                this.addHeaders()
+        );
+        HttpEntity entity = response.getEntity();
+        String json = EntityUtils.toString(entity);
+        return JsonUtils.unmarshal(json);
+    }
+
+    public Map getGroups() throws Exception {
+        HttpResponse response = new HttpUtils().makeRequest("GET",
+                host + "/service/marathon/v2/groups?embed=group.groups&embed=group.apps&embed=group.pods&embed=group.apps.deployments&embed=group.apps.counts&embed=group.apps.tasks&embed=group.apps.taskStats&embed=group.apps.lastTaskFailur",
+                null,
+                this.addHeaders()
+        );
+        HttpEntity entity = response.getEntity();
+        String json = EntityUtils.toString(entity);
+        return JsonUtils.unmarshal(json);
     }
 }
